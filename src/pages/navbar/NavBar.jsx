@@ -10,8 +10,7 @@ import { auth, signOutUser } from "../../utils/firebase/firebase.util";
 const NavBar = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const signOutHandler = async () => {
-    const res = await signOutUser();
-    console.log(res);
+    await signOutUser();
     setCurrentUser(null);
   };
 
@@ -37,7 +36,6 @@ const NavBar = () => {
               SIGN IN
             </Link>
           )}
-          <div onClick={() => console.log(auth)}>ok</div>
         </div>
       </div>
       <Outlet />
