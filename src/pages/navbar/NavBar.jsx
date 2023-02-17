@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, Outlet } from "react-router-dom";
 import "./navbar.syle.scss";
 
 import clothingLogo from "../../assets/crown.svg";
+import { UserContext } from "../../context/userContext";
+import { auth, signOutUser } from "../../utils/firebase/firebase.util";
 
 // import npLogo from "../assets/crown.svg";
 const NavBar = () => {
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const signOutHandler = async () => {
+    const res = await signOutUser();
+    console.log(res);
+    setCurrentUser(null);
+  };
+
   return (
     <>
       <div className="navigation">
@@ -19,9 +28,16 @@ const NavBar = () => {
           <Link className="nav-link" to="/shop">
             SHOP
           </Link>
-          <Link className="nav-link" to="/sign-in">
-            SIGN IN
-          </Link>
+          {currentUser ? (
+            <Link className="nav-link" onClick={signOutHandler}>
+              SIGN OUT
+            </Link>
+          ) : (
+            <Link className="nav-link" to="/auth">
+              SIGN IN
+            </Link>
+          )}
+          <div onClick={() => console.log(auth)}>ok</div>
         </div>
       </div>
       <Outlet />

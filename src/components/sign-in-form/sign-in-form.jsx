@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../context/userContext";
 import {
   createUserDocFromAuth,
   signInWithGooglePopup,
@@ -24,6 +25,8 @@ const SignInForm = () => {
     });
   };
 
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
   const signInWithGoogle = async () => {
     try {
       const res = await signInWithGooglePopup();
@@ -41,12 +44,16 @@ const SignInForm = () => {
     try {
       const res = await signInUserWithEmailAndPassword(email, password);
       //   const userDocRef = await createUserDocFromAuth(user, { displayName });
+      setCurrentUser(res.user);
+
       console.log(res);
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         return alert("Email is already in used!");
       } else if (error.code === "auth/user-not-found") {
         return alert("No Account with such email, please sign up first!!");
+      } else if (error.code === "auth/wrong-password") {
+        return alert("Invalid Credentials!!");
       } else {
         console.log(error.message);
       }
@@ -73,7 +80,11 @@ const SignInForm = () => {
         />
         <div className="buttons">
           <Button type="submit">SIGN IN</Button>
-          <Button onClick={signInWithGoogle} buttonType={"google"}>
+          <Button
+            type="button"
+            onClick={signInWithGoogle}
+            buttonType={"google"}
+          >
             SIGN IN WITH GOOGLE
           </Button>
         </div>

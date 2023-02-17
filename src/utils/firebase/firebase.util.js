@@ -10,6 +10,7 @@ import {
   signInWithRedirect,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
 // Datatbase realated functions
@@ -89,4 +90,8 @@ export const createUserDocFromAuth = async (userAuth, otherUserInfo) => {
     }
   }
   return userDocRef;
+};
+
+export const signOutUser = async () => {
+  return await signOut(auth);
 };
