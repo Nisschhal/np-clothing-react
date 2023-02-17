@@ -1,5 +1,5 @@
 import React from "react";
-import Category from "./Category";
+import Category from "../../components/Category";
 import "./directory.style.scss";
 import { Outlet } from "react-router-dom";
 const Directory = ({ categories }) => {
