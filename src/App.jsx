@@ -3,14 +3,11 @@ import reactLogo from "./assets/react.svg";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
-import categories from "./categories.json";
+import categories from "./data/categories.json";
 import Directory from "./pages/home/Directory";
 import NavBar from "./pages/navbar/NavBar";
 import Auth from "./pages/auth/Auth";
-
-function Shop() {
-  return <h1>I am shop page.</h1>;
-}
+import Shop from "./components/shop/shop";
 
 function App() {
   return (

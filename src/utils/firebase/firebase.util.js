@@ -11,6 +11,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 // Datatbase realated functions
@@ -92,6 +93,12 @@ export const createUserDocFromAuth = async (userAuth, otherUserInfo) => {
   return userDocRef;
 };
 
+// keep track of the auth events and take user as argument in callback
+
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);
+
+// SING OUT THE USER
 export const signOutUser = async () => {
   return await signOut(auth);
 };

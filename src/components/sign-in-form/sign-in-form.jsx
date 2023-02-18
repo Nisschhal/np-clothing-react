@@ -29,9 +29,7 @@ const SignInForm = () => {
 
   const signInWithGoogle = async () => {
     try {
-      const res = await signInWithGooglePopup();
-      console.log(res);
-      const userDocRef = await createUserDocFromAuth(res.user);
+      await signInWithGooglePopup();
     } catch (err) {
       console.log(err.message);
     }
@@ -46,7 +44,7 @@ const SignInForm = () => {
       //   const userDocRef = await createUserDocFromAuth(user, { displayName });
       setCurrentUser(res.user);
 
-      console.log(res);
+      // console.log(res);
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         return alert("Email is already in used!");
