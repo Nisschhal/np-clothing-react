@@ -5,10 +5,16 @@ import "./navbar.syle.scss";
 import clothingLogo from "../../assets/crown.svg";
 import { UserContext } from "../../context/userContext";
 import { auth, signOutUser } from "../../utils/firebase/firebase.util";
+import CartIcon from "../../components/cart/cart-icon";
+import CartDropdown from "../../components/cart/cart-dropdown";
+import { CartContext } from "../../context/cartContext";
 
 // import npLogo from "../assets/crown.svg";
 const NavBar = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+  const toggleCart = () => setIsCartOpen(!isCartOpen);
+
+  const { currentUser } = useContext(UserContext);
   const signOutHandler = async () => {
     await signOutUser();
   };
@@ -35,7 +41,9 @@ const NavBar = () => {
               SIGN IN
             </Link>
           )}
+          <CartIcon />
         </div>
+        {isCartOpen && <CartDropdown />}
       </div>
       <Outlet />
     </>
