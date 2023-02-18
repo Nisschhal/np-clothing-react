@@ -14,11 +14,11 @@ const CheckoutItem = ({ item }) => {
       <span className="name">{name}</span>
       <span className="quantity">
         <span className="arrow" onClick={() => decrementQty(item)}>
-          {"<"}
+          &#10094;
         </span>
-        {quantity}x
+        <span className="value"> {quantity}x</span>
         <span className="arrow" onClick={() => addToCart(item)}>
-          {">"}
+          &#10095;
         </span>
       </span>
       <span className="price">${price}</span>

@@ -56,9 +56,13 @@
 
   .quantity {
     display: flex;
+    justify-content: center;
+    align-items: center;
 
     .arrow {
       cursor: pointer;
+      font-size: 25px;
+      padding: 10px;
     }
 
     .value {
